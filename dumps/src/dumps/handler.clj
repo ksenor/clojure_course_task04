@@ -10,6 +10,3 @@
 
 (def app
   (handler/site app-routes))
-
-(def -main []
-  app)
