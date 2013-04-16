@@ -4,7 +4,9 @@
             [compojure.route :as route]))
 
 (defroutes app-routes
-  (GET "/" []  "ok")
+  (GET "/" []  (slurp (str 
+                       (-> (java.io.File. ".") .getAbsolutePath) 
+                       "/resources/i.html")))
   (GET "/req" r (str r))
 
   (route/resources "/")
