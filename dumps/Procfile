@@ -1,1 +1,1 @@
-web: lein with-profile production trampoline run -m dumps.web
+web: lein with-profile production ring server
