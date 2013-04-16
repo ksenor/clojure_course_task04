@@ -1,17 +1,17 @@
-(defproject dumps "1.0.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://dumps.herokuapp.com"
-  :license {:name "FIXME: choose"
-            :url "http://example.com/FIXME"}
-  :dependencies [[org.clojure/clojure "1.4.0"]
-                 [compojure "1.1.1"]
-                 [ring/ring-jetty-adapter "1.1.0"]
-                 [ring/ring-devel "1.1.0"]
-                 [ring-basic-authentication "1.0.1"]
-                 [environ "0.2.1"]
-                 [com.cemerick/drawbridge "0.0.6"]]
+(defproject dumps "0.0.1-SNAPSHOT"
+  :description "делаем себе дампыыы"
+  :url "http://jspcj.com"
+  ;; :license {:name "dumps"
+  ;;           :url "http://dmpz.ru"}
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [compojure "1.1.5"]
+                 [me.raynes/laser "1.1.1"]
+                 [mysql/mysql-connector-java "5.1.24"]
+                 [korma "0.3.0-RC5"]
+                 [lib-noir "0.4.9"]]
   :min-lein-version "2.0.0"
-  :plugins [[environ/environ.lein "0.2.1"]]
-  :hooks [environ.leiningen.hooks]
-  :profiles {:production {:env {:production true}}}
-  :main dumps.web)
+  :plugins [[lein-ring "0.8.3"]]
+  :ring {:handler dumps.handler/app}
+  :profiles {:dependencies [[ring-mock "0.1.3"]] 
+             :production {:env {:production true}}}
+  :main dumps.handler)
