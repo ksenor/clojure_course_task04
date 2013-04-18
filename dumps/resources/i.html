@@ -63,8 +63,9 @@
 	margin-left: 20px;
 	}
       </style>
-      <form action="/dmp">
-	<textarea rows="9" class="dmp_form"></textarea><br>
+      <form action="/dmp" method="POST" >
+	<textarea rows="9" class="dmp_form" name="our_dump"></textarea>
+	<br>
 	<button type="submit" class="mk_dump">Make dump!</button>
       </form>
 
