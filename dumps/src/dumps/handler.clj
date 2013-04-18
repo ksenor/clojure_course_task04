@@ -3,11 +3,14 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]))
 
+(defmacro rtr [res_path]
+  `(slurp (str
+          (-> (java.io.File. ".") .getAbsolutePath)
+          ~res_path)))
+
 (defroutes app-routes
-  (GET "/" []  (slurp (str 
-                       (-> (java.io.File. ".") .getAbsolutePath) 
-                       "/resources/i.html")))
-  (GET "/req" r (str r))
+  (GET "/" []  (rtr "/resources/i.html"))
+  ;; (POST "/" ff)
 
   (route/resources "/")
   (route/not-found "Not Found"))
