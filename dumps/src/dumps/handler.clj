@@ -1,8 +1,10 @@
 (ns dumps.handler
   (:use compojure.core
-        korma.db)
+        korma.db
+        korma.core)
   (:require [compojure.handler :as handler]
-            [compojure.route :as route]))
+            [compojure.route :as route]
+            [clj-time.core :as time]))
 
 (defmacro gpp [headers text_input_name] ;; get post params
   "headers - заголовки запроса вида {key val, ...}
@@ -20,9 +22,25 @@
 ;; перед тем как работать с бд надо её создать 
 ;; поможет нам в этом - ../../ne_sqli_creator.clj
 
+;; ;; работа с либой korma
+
+;; коннектимся к базе
+(defdb sqli {:classname "org.sqlite.JDBC"
+             :subprotocol "sqlite"
+             :subname "resources/db/ne.sqli"})
+
+;; задаем сущности
+(defentity dumps
+  (table :dumps)
+  (database sqli)
+  (entity-fields :date :body))
+
+;; берем POST-запрос с переданным дампом и пишем в Базу
+(defn add_dump_to_db [dump_txt] (insert dumps (values {:date (.toString (time/now)) :body dump_txt})))
+
 (defroutes app-routes
   (GET "/" []  (rtr "/resources/i.html"))
-  (POST "/dmp" h (gpp h :our_dump))
+  (POST "/dmp" h (add_dump_to_db (gpp h :our_dump)))
 
   (route/resources "/")
   (route/not-found "Not Found"))
