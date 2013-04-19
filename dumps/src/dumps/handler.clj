@@ -36,7 +36,10 @@
   (entity-fields :date :body))
 
 ;; берем POST-запрос с переданным дампом и пишем в Базу
-(defn add_dump_to_db [dump_txt] (insert dumps (values {:date (.toString (time/now)) :body dump_txt})))
+(defn add_dump_to_db [dump_txt] 
+  (insert dumps (values 
+                 {:date (.toString (time/now)) 
+                  :body dump_txt})))
 
 (defroutes app-routes
   (GET "/" []  (rtr "/resources/i.html"))
