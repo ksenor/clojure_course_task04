@@ -50,11 +50,11 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
 
       <style>
 	.dmp_form { /* форма через которую мы делаем дампы */
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	margin-left: 20px;
 	width: 500px;
 	height: 300px;
@@ -63,11 +63,17 @@
 	margin-left: 20px;
 	}
       </style>
-      <form action="/dmp" method="POST" >
-	<textarea rows="9" class="dmp_form" name="our_dump"></textarea>
-	<br>
-	<button type="submit" class="mk_dump">Make dump!</button>
-      </form>
+
+      <div class="span6">
+	   <form action="/dmp" method="POST" >
+	     <textarea class="dmp_form" name="our_dump"></textarea>
+	     <br>
+	     <button type="submit" class="mk_dump">Make dump!</button>
+	   </form>
+      </div>
+      <div class="span6" name="our_dumps">
+	
+      </div>
 
     </div> <!-- /container -->
 
