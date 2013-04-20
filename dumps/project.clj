@@ -9,10 +9,16 @@
                  [org.clojure/java.jdbc "0.2.3"]
                  [org.xerial/sqlite-jdbc "3.7.2"]
                  [korma "0.3.0-RC5"]
-                 [lib-noir "0.4.9"]]
+                 [lib-noir "0.4.9"]
+                 [com.cemerick/piggieback "0.0.4"]
+                 [enfocus "1.0.1"]
+                 [jayq "2.3.0"]]
   :min-lein-version "2.0.0"
-  :plugins [[lein-ring "0.8.3"]]
+  :plugins [[lein-ring "0.8.3"]
+            [lein-cljsbuild "0.3.0"]]
   :ring {:handler dumps.handler/app}
+  :source-paths ["src/clj" "src/cljs"]
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :profiles {:dependencies [[ring-mock "0.1.3"]] 
              :production {:env {:production true}}}
   :main dumps.handler)
